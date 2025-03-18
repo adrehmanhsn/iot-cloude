@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Device extends Model
 {
@@ -11,9 +12,13 @@ class Device extends Model
         'name',
         'device_type',
         'device_identifier'];
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function Sensor()
+    {
+        return $this->hasMany(Sensor::class);
     }
 
 }

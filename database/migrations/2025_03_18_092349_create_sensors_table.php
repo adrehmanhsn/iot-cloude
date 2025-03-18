@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('sensors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('device_id');
+            $table->json('data');
             $table->timestamps();
         });
     }
