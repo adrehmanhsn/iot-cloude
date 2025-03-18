@@ -12,15 +12,15 @@
         </thead>
         <tbody class="divide-y divide-gray-800 bg-gray-900 text-gray-300">
         @foreach ($devices as $device)
-
-
         <tr>
             <td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6 lg:pl-8">{{$device->id}}</td>
             <td class="whitespace-nowrap px-3 py-4">{{$device->user->name}}</td>
             <td class="whitespace-nowrap px-3 py-4">{{$device->device_type}}</td>
             <td class="whitespace-nowrap px-3 py-4">{{$device->device_identifier}}</td>
             <td class="whitespace-nowrap px-3 py-4">
-                <a href="#" class="text-indigo-400 hover:text-indigo-300">Edit</a>
+                <a href="{{route('device.show', $device->id)}}" class="text-indigo-400 hover:text-indigo-300 inline-block mr-5">view</a>
+                <a href="{{route('device.edit', $device->id)}}" class="text-indigo-400 hover:text-indigo-300 inline-block">Edit</a>
+
             </td>
         </tr>
         @endforeach

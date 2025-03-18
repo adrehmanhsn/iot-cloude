@@ -18,3 +18,6 @@ Route::middleware([
 });
 
 Route::get('devices', [DeviceController::class,'index'])->name('devices.index');
+Route::get('/devices/{id}/edit', [DeviceController::class,'edit'])->name('device.edit');
+Route::get('devices/{id}', [DeviceController::class,'show'])->name('device.show');
+
