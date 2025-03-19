@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Device extends Model
 {
@@ -16,7 +17,7 @@ class Device extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function Sensor()
+    public function Sensor(): HasMany
     {
         return $this->hasMany(Sensor::class);
     }

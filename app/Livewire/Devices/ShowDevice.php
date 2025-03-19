@@ -12,7 +12,7 @@ class ShowDevice extends Component
     public function mount($device_id): void
     {
         $this->device_id = $device_id;
-        $this->device = Device::findOrFail($this->device_id);
+        $this->device = Device::with('sensor')->findOrFail($this->device_id);
     }
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
