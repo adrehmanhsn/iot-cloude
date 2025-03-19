@@ -9,22 +9,22 @@ use Illuminate\Support\Facades\Cache;
 
 class SensorController extends Controller
 {
-    public function store(Request $request,$device_id)
+    public function store(Request $request, $device_id)
     {
         $request->validate([
            'data' => 'required|array'
         ]);
         $device = Device::findOrFail($device_id);
-        $data = $request->date;
+        $data = $request->data;
 
-        $cacheKey = "device_{$device_id}_sensor_data}";
-        Cache::put($cacheKey, $data, now()->addSeconds(4));
+        $cacheKey = "device_{$device_id}_sensor_data";
+        Cache::put($cacheKey, $data, now()->addSecond(4));
 
         if (isset($data['temperature']) && $data['temperature']>100)
         {
             $sensor = new Sensor([
-                'device_id' => $device_id,
-                'data' =>$request->data
+                'device_id' => $device->id,
+                'data' =>$data
             ]);
             $sensor->save();
             return response()->json([
@@ -32,6 +32,7 @@ class SensorController extends Controller
                 'sensor' => $sensor,
             ]);
         }
+//        return response()->json(['message' => $data]);
         return response()->json([
             'message' => 'Data received and cached, no critical action needed ',
         ]);

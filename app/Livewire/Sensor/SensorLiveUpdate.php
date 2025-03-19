@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Livewire\Sensor;
-use Detection\Cache\Cache;
 use Illuminate\contracts\view\factory;
 use Illuminate\contracts\view\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class SensorLiveUpdate extends Component
@@ -19,13 +19,13 @@ class SensorLiveUpdate extends Component
         $this->fetchData();
 
     }
-    private function fetchData():void
+    public function fetchData():void
     {
-        $cacheKey = "device_{$this->device_id}_sensor_data}";
+        $cacheKey = "device_{$this->device_id}_sensor_data";
         $latestSensorData = Cache::get($cacheKey);
 
         if($latestSensorData){
-            $this->tempr = $latestSensorData['temperature'] ?? 'N/A';
+            $this->tempr = $latestSensorData['temperature'] ?? $latestSensorData;
             $this->hum = $latestSensorData['humidty'] ?? 'N/A';
         }else{
             $this->tempr = 'N/A';
